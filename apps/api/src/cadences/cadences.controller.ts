@@ -8,7 +8,7 @@ export class CadencesController {
   constructor(private readonly cadencesService: CadencesService) {}
 
   @Post()
-  create(@Body() createCadenceDto: CreateCadenceDto) {
+  create(@Body() createCadenceDto: CreateCadenceDto[]) {
     return this.cadencesService.create(createCadenceDto);
   }
 

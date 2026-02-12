@@ -4,8 +4,11 @@ import { UpdateCadenceDto } from './dto/update-cadence.dto';
 
 @Injectable()
 export class CadencesService {
-  create(createCadenceDto: CreateCadenceDto) {
-    return 'This action adds a new cadence';
+  private readonly email: any = [];
+
+  create(emailCandence: CreateCadenceDto[]) {
+    this.email.push(emailCandence);
+    return this.email;
   }
 
   findAll() {
