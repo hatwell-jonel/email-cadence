@@ -52,6 +52,38 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3001/api
+GET http://localhost:3001/api/cadences
 
 ###
+GET http://localhost:3001/api/cadences/cad_12224
+
+###
+PUT http://localhost:3001/api/cadences/cad_12223
+Content-Type: application/json
+
+{
+  "id": "cad_12223",
+  "name": "Welcome Flow",
+  "steps": [
+    {
+      "id": "1",
+      "type": "SEND_EMAIL",
+      "subject": "Welcome",
+      "body": "Hello there updated"
+    },
+    {
+      "id": "2",
+      "type": "WAIT",
+      "seconds": 10
+    },
+    {
+      "id": "3",
+      "type": "SEND_EMAIL",
+      "subject": "Follow up",
+      "body": "Checking in updated"
+    }
+  ]
+}
+
+###
+DELETE http://localhost:3001/api/cadences/cad_12223

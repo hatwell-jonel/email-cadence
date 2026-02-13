@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { CadencesService } from './cadences.service';
 import { CreateCadenceDto } from './dto/create-cadence.dto';
 import { UpdateCadenceDto } from './dto/update-cadence.dto';
@@ -19,16 +19,16 @@ export class CadencesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.cadencesService.findOne(+id);
+    return this.cadencesService.findOne(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateCadenceDto: UpdateCadenceDto) {
-    return this.cadencesService.update(+id, updateCadenceDto);
+    return this.cadencesService.update(id, updateCadenceDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cadencesService.remove(+id);
+    return this.cadencesService.remove(id);
   }
 }

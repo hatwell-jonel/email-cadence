@@ -6,24 +6,30 @@ import { UpdateCadenceDto } from './dto/update-cadence.dto';
 export class CadencesService {
   private readonly email: any = [];
 
-  create(emailCandence: CreateCadenceDto[]) {
-    this.email.push(emailCandence);
+  create(emailCadence: CreateCadenceDto[]) {
+    this.email.push(...emailCadence);
     return this.email;
   }
 
   findAll() {
-    return `This action returns all cadences`;
+    return this.email;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cadence`;
+  findOne(id: string) {
+    console.log('id', id);
+    return this.email.find((cadence: any) => cadence.id === id);
   }
 
-  update(id: number, updateCadenceDto: UpdateCadenceDto) {
-    return `This action updates a #${id} cadence`;
+  update(id: string, updateCadenceDto: UpdateCadenceDto) {
+    const index = this.email.findIndex((cadence: any) => cadence.id === id);
+    if (index === -1) {
+      return null;
+    }
+    this.email[index] = { ...this.email[index], ...updateCadenceDto };
+    return this.email[index];
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} cadence`;
   }
 }
