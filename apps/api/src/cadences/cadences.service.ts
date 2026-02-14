@@ -1,14 +1,28 @@
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { CreateCadenceDto } from './dto/create-cadence.dto';
 import { UpdateCadenceDto } from './dto/update-cadence.dto';
 
+type CadenceRecord = Omit<CreateCadenceDto, 'id'> & { id: string };
+
 @Injectable()
 export class CadencesService {
-  private readonly email: any = [];
+  private readonly email: CadenceRecord[] = [];
 
   create(emailCadence: CreateCadenceDto[]) {
-    this.email.push(...emailCadence);
-    return this.email;
+    const created = emailCadence.map((cadence) => ({
+      id: `cad_${randomUUID()}`,
+      ...cadence,
+      steps: cadence.steps.map((step) => ({
+        ...step,
+        id: `step_${randomUUID()}`,
+      })),
+    }));
+
+    console.log(created);
+
+    this.email.push(...created);
+    return created;
   }
 
   findAll() {
@@ -16,12 +30,11 @@ export class CadencesService {
   }
 
   findOne(id: string) {
-    console.log('id', id);
-    return this.email.find((cadence: any) => cadence.id === id);
+    return this.email.find((cadence) => cadence.id === id);
   }
 
   update(id: string, updateCadenceDto: UpdateCadenceDto) {
-    const index = this.email.findIndex((cadence: any) => cadence.id === id);
+    const index = this.email.findIndex((cadence) => cadence.id === id);
     if (index === -1) {
       return null;
     }
@@ -31,5 +44,11 @@ export class CadencesService {
 
   remove(id: string) {
     return `This action removes a #${id} cadence`;
+  }
+
+  removeAll() {
+    const removedCount = this.email.length;
+    this.email.length = 0;
+    return removedCount;
   }
 }

@@ -10,10 +10,6 @@ import { CreateCadenceStepDto  } from './step-cadence.dto';
 export class CreateCadenceDto {
     @IsString()
     @IsNotEmpty()
-    id!: string;
-
-    @IsString()
-    @IsNotEmpty()
     name!: string;
 
     @IsArray()

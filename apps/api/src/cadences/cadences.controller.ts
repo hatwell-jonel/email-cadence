@@ -27,6 +27,11 @@ export class CadencesController {
     return this.cadencesService.update(id, updateCadenceDto);
   }
 
+  @Delete()
+  removeAll() {
+    return this.cadencesService.removeAll();
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.cadencesService.remove(id);
