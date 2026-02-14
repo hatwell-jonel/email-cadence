@@ -19,10 +19,8 @@ export class CadencesService {
       })),
     }));
 
-    console.log(created);
-
     this.email.push(...created);
-    return created;
+    return this.email;
   }
 
   findAll() {
