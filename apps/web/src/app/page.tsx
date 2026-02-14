@@ -1,3 +1,5 @@
+import { Button } from '@org/shared-ui';
+
 export default function Index() {
   /*
    * Replace the elements below with your own.
@@ -8,6 +10,7 @@ export default function Index() {
     <div>
       <div className="wrapper">
         <div className="container">
+          <Button variant={'secondary'}>ssss</Button>
           <div id="welcome">
             <h1>
               <span> Hello there, </span>
